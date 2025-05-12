@@ -35,9 +35,7 @@ df <- df %>% mutate(
 table(df$depression)
 prop.table(table(df$depression))
 
-# Gráficos categóricos
-categorical_vars <- c("gender", "dietary_habits", "sleep_duration", 
-                      "suicidal_thoughts", "family_history", "degree")
+#categorical_vars <- c("gender", "dietary_habits", "sleep_duration", "suicidal_thoughts", "family_history", "degree")
 
 
 # Gráficos categóricos
@@ -55,12 +53,12 @@ ggplot(df, aes_string(x = "gender", fill = "depression")) +
 # Hábitos alimentarios
 ggplot(df, aes_string(x = "dietary_habits", fill = "depression")) +
   geom_bar(position = "fill") +
-  labs(title = "Distribución de hábitos alimentarios \npor Depresión",
+  labs(title = "Distribución de hábitos alimentarios según \npresencia de depresión",
        x = "Hábitos alimentarios",
        y = "Proporción", 
        fill = "Depresión") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5))
 
 # Duración de sueño
 ggplot(df, aes_string(x = "sleep_duration", fill = "depression")) +
@@ -114,7 +112,10 @@ ggplot(df, aes_string(x = "depression", y = "age", fill = "depression")) +
 # Presión academica
 ggplot(df, aes_string(x = "depression", y = "academic_pressure", fill = "depression")) +
   geom_boxplot() +
-  labs(title = paste("Boxplot de depresión por presión academica")) +
+  labs(title = paste("Distribución de presión académica \nsegún presencia de depresión"),
+       x = "Depresión",
+       y = "Presión académica",
+       fill = "Depresión") +
   theme_minimal()
 
 # Presión laboral
@@ -146,3 +147,11 @@ ggplot(df, aes_string(x = "depression", y = "financial_stress", fill = "depressi
   geom_boxplot() +
   labs(title = "Boxplot de depresión por estrés financiero") +
   theme_minimal()
+
+# Correlaciones numericas
+numeric_vars <- c("age", "academic_pressure", "work_pressure", 
+                  "cgpa", "study_satisfaction", "work_study_hours", 
+                  "financial_stress")
+
+ggplot(df, aes(x = df$age)) + 
+  geom_histogram()
